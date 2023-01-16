@@ -10,7 +10,7 @@ def read(fname):
 
 
 setup(
-    name='django-is-core',
+    name='skip-django-is-core',
     version=get_version(),
     description="Information systems core.",
     long_description=read('README.md'),
@@ -18,7 +18,7 @@ setup(
     keywords='django, admin, information systems, REST',
     author='Lubos Matl',
     author_email='matllubos@gmail.com',
-    url='https://github.com/matllubos/django-is-core',
+    url='https://github.com/skip-pay/django-is-core',
     license='BSD',
     package_dir={'is_core': 'is_core'},
     include_package_data=True,
@@ -34,9 +34,9 @@ setup(
     ],
     install_requires=[
         'django>=2.2, <4.0',
-        'django-pyston>=2.16.2',
-        'django-block-snippets>=2.0.1',
-        'django-chamber>=0.6.11',
+        'skip-django-pyston>=2.16.4.1',
+        'skip-django-block-snippets>=2.0.2.1',
+        'skip-django-chamber>=0.6.16.3',
         'python-dateutil>=2.8.1',
         'pytz',
         'Unidecode',
