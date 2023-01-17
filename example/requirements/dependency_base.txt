@@ -1,5 +1,4 @@
 requests>=2.25.1
-skip-django-block-snippets==2.0.2.1
 django-class-auth-views==1.0.2
 python3-openid==3.2.0
 html5lib==1.1
