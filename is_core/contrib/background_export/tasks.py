@@ -21,7 +21,7 @@ from celery import shared_task
 
 from .models import ExportedFile
 
-from .signals import export_success
+from .signals import export_failure, export_success
 
 
 def get_rest_request(user, rest_context):
@@ -66,6 +66,11 @@ class BackgroundSerializationTask(LoggedTask):
         super().on_task_success(task_id, args, kwargs, retval)
         exported_file = self.get_exported_file(args[0])
         export_success.send(sender=self.__class__, exported_file=exported_file)
+
+    def on_failure(self, exc, task_id, args, kwargs, einfo):
+        super().on_task_success(exc, task_id, args, kwargs, einfo):
+        print(args, kwargs)
+        export_failure.send(sender=self.__class__, reason={})
 
 
 @shared_task(base=BackgroundSerializationTask,
