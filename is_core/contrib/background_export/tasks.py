@@ -86,8 +86,13 @@ def background_serialization(self, exported_file_pk, rest_context, language, req
         exported_file = self.get_exported_file(exported_file_pk)
         exported_file.file.save(filename, ContentFile(''))
         request = get_rest_request(exported_file.created_by, rest_context)
+
         if settings.BACKGROUND_EXPORT_TASK_UPDATE_REQUEST_FUNCTION:
             request = import_string(settings.BACKGROUND_EXPORT_TASK_UPDATE_REQUEST_FUNCTION)(request)
+
+        if settings.BACKGROUND_EXPORT_TASK_CALLBACK:
+            import_string(settings.BACKGROUND_EXPORT_TASK_CALLBACK)(request, query, filename, exported_file)
+
         query = string_to_obj(query)
         queryset = query.model.objects.all()
         queryset.query = query
